@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.js"></script>
+    <style>
+        @media screen and (min-width:550px){
+            li{        
+            flex:1;
+            margin:20px;
+            padding:20px;
+            }
+            ul{
+            display: flex;
+            }
+            li>div{
+                line-height:30px;
+            }
+            #container{
+            margin-left:60px;
+            
+            }
+        }
+        @media screen and (max-width:550px){
+            li{        
+            float:left;
+            margin-right:45px;
+            }
+            li>div{
+                line-height:20px;
+            }
+            #container{
+                text-align: center;
+                margin-top:30px;
+                
+            }
+        }
+        li{
+            list-style: none;
+            margin-top:20px;
+            background-color: beige; 
+            font-family:'Times New Roman', Times, serif, Courier, monospace;
+            font-size:14px;
+        }
+        li>div{
+            height:auto;
+        }   
+
+        #container>div{
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            font-size:20px;
+        }
+        .span{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="container">
+            <div>天气查询</div>
+            <span id="city">城市：</span><input type="text" id="myCity" v-model="city" style="width:100px;" @focus="hide">
+            <button @click="getWeather">获取天气</button>
+        </div>
+        
+    </label>
+
+        <ul>
+            <li v-for="item of weather">
+                <div><strong>日期：</strong>{{item.date}}</div>
+                <div><strong>温度：</strong><span class="span">{{item.low.substring(3)}}~{{item.high.substring(3)}}</span></div>
+                <div><strong>风向：</strong>{{item.fengxiang}}</div>
+                <div><strong>风力：</strong>{{item.fengli.substring(9, 11)}}</div>
+                <div><strong>天气：</strong>{{item.type}}</div>
+                <div><strong>描述：</strong>{{describe}}</div>
+            </li>
+        </ul>
+        
+    </div>
+    
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                weather:[],
+                city:"",
+                describe:"",
+                hidden:"false"
+            },
+            methods:{
+                getWeather:function(){
+                    _this = this;
+                    
+                    axios.get("http://wthrcdn.etouch.cn/weather_mini?city="+this.city)
+                    .then(function(response){
+                        console.log("response",response)
+                        console.log("ajax内部的匿名函数：",this)
+                        _this.weather = response.data.data.forecast
+                        _this.describe = response.data.data.ganmao
+                    }).catch(function(error){
+                        console.log(error);
+                    })
+                },
+                hide:function(){
+                this.weather=""
+                this.city=""
+            }
+                
+            },
+           
+        })
+    </script>
+</body>
+</html>

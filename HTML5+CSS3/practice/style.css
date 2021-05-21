@@ -1,0 +1,256 @@
+body{
+    background:white;
+    font-family: Helvetica Neue, Helvetica,Arial,sans-serif;
+    margin:0;
+    padding:0;
+}
+
+/*-------header part------*/
+header{
+    height:675px;
+    text-align:center;
+}
+/*待完善*/
+header nav{
+    height: 80px;
+    border-top:6px solid yellowgreen;
+    position:fixed;
+    background-color: white;
+}
+header nav ul{
+    list-style-type: none;
+    float:right;
+    width: 1517px;
+    margin-left: 150px;
+    padding:0;
+}
+header nav li{
+    display:inline-block;
+    font-size:14px;
+    margin-top:15px;
+    margin-left:50px;
+}
+header nav a{
+    text-decoration: none;
+    color: gray;
+}
+nav a:hover{
+    color: darkgray;
+
+}
+header .logo {
+        /*background-image: url("images/Logo-website-1.png");*/
+        /*background-size: 160px;*/
+        height: 58px;
+        width: 160px;
+        display: flex;
+        float:left;
+        margin-top: 0px;
+        /*position:relative;*/
+}
+header section{
+    height:580px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("images/final-render_PP-1.jpg");
+    background-position: center ;
+    text-align: center;
+    border: 1px solid transparent;
+
+}
+header section a{
+    text-decoration: none;
+    color: white;
+}
+header section ul {
+    margin: 150px 300px;
+    color: white;
+    list-style-type: none;
+}
+.maintext{
+    font-size: 50px;
+    line-height: 80px;
+}
+.explain{
+    font-size: 15px;
+}
+.more{
+    font-size: 15px;
+    display:inline-block;
+    margin-top:20px;
+    padding:9px 27px;
+    border:2px solid white;
+}
+/*------------main part----------*/
+main{
+    text-align:center;
+}
+main div p {
+    font-size: 40px;
+}
+
+#fourpic a:hover img{
+    filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;
+    position: relative;
+    z-index: -1;
+
+}
+#fourpic a{
+    padding:30px;
+
+}
+/*main part2*/
+.divcolor{
+    margin-top: 50px;
+    width:100%;
+    background-color: whitesmoke;
+    display:flex;
+}
+
+main div figcaption{
+    font-size: 40px;
+    padding:50px 0;
+}
+main #box1{
+    vertical-align:top;
+    width:550px;
+    float: left;
+    display: inline-block;
+    text-align:left;
+    margin-left: 100px;
+    padding-left: 80px;
+    letter-spacing: 1px;
+}
+#box1 a,#box2 a{
+    text-decoration: none;
+
+}
+
+main #box2{
+    vertical-align:top;
+    width:550px;
+    display: inline-block;
+    float: left;
+    text-align:left;
+    padding-right: 100px;
+    letter-spacing: 1px;
+}
+
+#box1 div{
+    background-color: white;
+    box-shadow: 0 0 1px 0 black;
+}
+
+/*main part3*/
+main .divpicture{
+    margin:50px 0;
+}
+main .divpicture a{
+    padding:10px;
+}
+
+/*main part4*/
+.div4{
+    padding: 50px 0;
+    background-color: whitesmoke;
+}
+.div4 a{
+    margin:10px;
+
+}
+
+/*----------footer part-----------*/
+footer{
+    background: url("images/s (1).jpg");
+    /*linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))*/
+    background-attachment: fixed;
+    background-size: 100%;
+
+}
+footer button{
+    border: 1px solid white;
+    background-color: transparent;
+    color:white;
+    width: 100px;
+    height:30px;
+    border-radius: 5%;
+
+}
+
+footer div ul{
+    list-style-type: none;
+    color:white;
+    display: inline-block;
+}
+footer div{
+}
+.connect,.show{
+    padding-top:50px;
+    width:600px;
+    height: 70px;
+    letter-spacing: 3px;
+}
+.connect{
+    text-align: left;
+    margin-left: 200px;
+
+}
+footer .button3{
+    margin-left: 200px;
+    margin-bottom: 100px;
+
+}
+.button3 a{
+    text-decoration: none;
+    color: white;
+    background: transparent;
+    border:1px solid white;
+    padding: 5px 10px;
+}
+.button3 a:hover{
+    background: white;
+    border:1px solid white;
+    color:yellowgreen;
+}
+#b1{
+
+    margin-right: 555px;
+}
+#b2{
+    margin-right: 50px;
+}
+
+/*footer part-2*/
+
+footer .end{
+    background-color: #515151;
+    padding:50px 0;
+    line-height: 35px;
+
+}
+.end a{
+    text-decoration: none;
+    color: white;
+}
+footer .end1{
+    display: inline-block;
+    margin-left: 800px;
+    margin-right:100px;
+}
+
+/*footer part-3*/
+footer .tag{
+    width:1517px;
+    height:70px;
+    background: #333;
+
+    text-align: right;
+
+}
+.tag a{
+    display: inline-block;
+    margin-right: 25px;
+    padding-top:20px;
+}
+
+.tag .move{
+    margin-right: 200px;
+}

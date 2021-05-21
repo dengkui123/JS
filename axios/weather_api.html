@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.js"></script>
+    <style>   
+        li{
+            list-style: none;
+            margin-top:20px;
+            background-color:#D2E9FF; 
+            font-family:'Times New Roman', Times, serif, Courier, monospace;
+            font-size:14px;
+			margin:50px;
+        }
+        li>div{
+            height:auto;
+			margin-left:10px;
+        }   
+        #container>div{
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            font-size:20px;
+        }
+        .span{
+            color:red;
+        }
+		
+		.button{
+            font-size:14px;
+            font-family:Arial;
+            font-weight:bold;
+            -moz-border-radius:8px;
+            -webkit-border-radius:8px;
+            border-radius:8px;
+            border:1px solid #469df5;
+            padding:2px 5px;
+            text-decoration:none;
+            background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #D2E9FF), color-stop(100%, #4197ee) );
+            background:-moz-linear-gradient( center top, #D2E9FF 5%, #4197ee 100% );
+            background:-ms-linear-gradient( top, #D2E9FF 5%, #4197ee 100% );
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#D2E9FF', endColorstr='#4197ee');
+            background-color:#D2E9FF;
+            color:#ffffff;
+            display:inline-block;
+            text-shadow:1px 0px 0px #287ace;
+            -webkit-box-shadow:inset 1px 1px 0px 0px #cae3fc;
+            -moz-box-shadow:inset 1px 1px 0px 0px #cae3fc;
+            box-shadow:inset 1px 1px 0px 0px #cae3fc;
+		}
+        .button:hover {
+            background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #4197ee), color-stop(100%, #D2E9FF) );
+            background:-moz-linear-gradient( center top, #4197ee 5%, #D2E9FF 100% );
+            background:-ms-linear-gradient( top, #4197ee 5%, #D2E9FF 100% );
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4197ee', endColorstr='#D2E9FF');
+            background-color:#4197ee;
+            cursor:pointer;
+		}
+        .button:active {
+            position:relative;
+            top:1px;
+		}
+		input{
+			padding-left: 2px;
+			border-top: 1px solid #9AA587;
+			border-right: 1px solid #DDDDDD;
+			border-bottom: 1px solid #DDDDDD;
+			border-left: 1px solid #9AA587;
+		}
+		@media screen and (min-width:550px){
+            li{        
+                flex:1;
+                margin:50px;
+                padding:20px;
+            }
+            ul{
+                display: flex;
+            }
+            li>div{
+                line-height:30px;
+            }
+            #container{
+                margin-left:60px;
+            
+            }
+        }
+		@media screen and (max-width:550px){
+			li{        
+                display:block;
+                margin-right:100px;
+			}
+			li>div{
+				line-height:20px;
+			}
+			#container{
+				text-align: center;
+				margin-top:30px;
+			}
+		}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="container">
+            <div>天气查询</div>
+            <span id="city"><span id="city">城市：</span><input type="text" id="myCity" v-model="city" style="width:100px;" @focus="hide">
+            <button @click="getWeather1" class="button">查询</button>
+        </div>
+        
+    </label>
+
+        <ul>
+            <li v-for="item of weather">
+				<div><strong>城 市：&#9;</strong>{{city}}</div>
+                <div><strong>日 期：&#9;</strong>{{item.fxDate}}</div>
+                <div><strong>温 度：&#9;</strong><span class="span">{{item.tempMin}}~{{item.tempMax}}℃</span></div>
+                <div><strong>风 向：&#9;</strong>{{item.windDirDay}}</div>
+                <div><strong>风 力：&#9;</strong>{{item.windSpeedDay}}</div>
+                <div><strong>天 气：&#9;</strong>{{item.textDay}}</div>
+            </li>
+        </ul>
+        
+    </div>
+    
+    <script>
+        let vm = new Vue({
+            el:"#app",
+            data:{
+                weather:[],
+                city:"",
+                describe:"",
+                hidden:"false",
+                cityId:"",
+            },
+            methods:{
+                getWeather1:function(){
+                    _this = this;
+                    axios.get("https://geoapi.qweather.com/v2/city/lookup?location="+ this.city +"&key=0a24533151e142569575c38f9e71938d")
+                    .then(function(response){
+                        _this.cityId = response.data.location[0].id;
+                        _this.getWeather2();
+                    }).catch(function(error){
+                        console.log(error);
+                    })
+                    
+                },
+                getWeather2:function(){
+                    axios.get("https://devapi.qweather.com/v7/weather/3d?location="+this.cityId+"&key=0a24533151e142569575c38f9e71938d")
+                    .then(function(response){
+                        console.log("response",response)
+                        _this.weather = response.data.daily;
+                    }).catch(function(error){
+                        console.log(error);
+                    })
+                },
+                hide:function(){
+                this.weather=""
+                this.city=""
+                this.cityId=""
+            }
+                
+            },
+           
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行政区三级联动api</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.js"></script>
+    <style>
+        select{ 
+            width:100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <select v-model="province">
+            <option value="0">省份</option>
+            <option v-for="item in list" v-if="item.code.endsWith('0000')" :value="item.code">{{item.name}}</option>
+        </select>
+        <select v-model="city">
+            <option value="0">城市</option>
+            <option v-for="item in list" v-if="item.code.endsWith('00') && !item.code.endsWith('0000') && item.code.slice(0,2) == province.toString().slice(0,2)" :value="item.code" >{{item.name}}</option>
+        </select>
+        <select v-model="area"> 
+            <option value="0">地区</option>
+            <option v-for="item in list" v-if="!item.code.endsWith('00') && item.code.slice(0,4) == city.toString().slice(0,4)" :value="item.code">{{item.name}}</option>
+        </select>
+    </div>
+	
+
+    <script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            province:0,
+            city:0,
+            area:0,
+            list:[],
+			hide:true,
+			hide2:false,
+        },
+        mounted:function () {
+            axios.get("https://www.wenjiangs.com/api/v2/xzqhSimple")
+                .then(function(response){
+                console.log(response);
+                console.log(response.data);
+                console.log(response.data[0].children[0])
+                console.log(response.data[0].children[0].children[0]);
+                for(let item of response.data){
+                    vm.list.push({code:item.code,name:item.name});
+                    for(let itemChild of item.children){
+                        vm.list.push({code: itemChild.code,name: itemChild.name});
+                        for(let itemChildChild of itemChild.children){
+                            vm.list.push({code:itemChildChild.code,name:itemChildChild.name});
+                        }
+                    }
+                }
+            }).catch(function(error){
+                    console.log(error);
+            })
+        },
+        watch:{
+            province:function(){
+                this.city = 0;
+                this.area = 0;
+            },
+            city:function(){
+                this.area = 0;
+            }
+        },
+    })
+    
+    </script>
+   
+</body>
+</html>
