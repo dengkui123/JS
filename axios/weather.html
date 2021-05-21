@@ -96,7 +96,7 @@
                 getWeather:function(){
                     _this = this;
                     
-                    axios.get("https://wthrcdn.etouch.cn/weather_mini?city="+this.city)
+                    axios.get("http://wthrcdn.etouch.cn/weather_mini?city="+this.city)
                     .then(function(response){
                         console.log("response",response)
                         console.log("ajax内部的匿名函数：",this)
