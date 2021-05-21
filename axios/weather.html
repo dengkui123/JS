@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>天气</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.js"></script>
@@ -97,7 +96,7 @@
                 getWeather:function(){
                     _this = this;
                     
-                    axios.get("http://wthrcdn.etouch.cn/weather_mini?city="+this.city)
+                    axios.get("https://wthrcdn.etouch.cn/weather_mini?city="+this.city)
                     .then(function(response){
                         console.log("response",response)
                         console.log("ajax内部的匿名函数：",this)
