@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>component</title>
+    <link rel = "icon" href = "favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 子组件与父组件之间的通信 -->
+    <div id="app">
+        <div>这是父组件的内容：</div>
+        <div>name:{{messageParent.name}}，age:{{ messageParent.age }}，country:{{ messageParent.country }}。</div>
+        <child-component v-bind:message-child="messageParent" v-on:add-age="messageParent.age++" v-on:biden-message="change"></child-component>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                messageParent:
+                    {name:"trump",age:60,country:"America"},
+            },
+            methods:{   
+                change:function(name,age,country){
+                    this.messageParent.name=name;
+                    this.messageParent.age=age;
+                    this.messageParent.country=country;
+                }
+            },
+            components:{
+                'child-component':{
+                    props:{
+                        messageChild:Object
+                    },
+                    data:function(){
+                        return {
+                            
+                        }
+                    },
+                    template: `<div>
+                        <div>这是子组件内容：</div>
+                        <div >name:{{ messageChild.name }}，age:{{ messageChild.age }}，country:{{ messageChild.country }}。</div>
+                        <button v-on:click="changeMessage">修改父组件信息</button>
+                        <button v-on:click="$emit('add-age')">父组件age加1</button>
+                        </div>`,
+                    methods:{
+                        changeMessage:function(){
+                            this.$emit('biden-message','Biden','70','US');
+                            }
+
+                    }
+                },
+            }
+        })
+    </script>
+</body>
+</html>
