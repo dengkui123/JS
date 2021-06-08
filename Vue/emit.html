@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emit</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{num}}</div>
+        <add-num @add-num = 'num+=1'></add-num>
+        <sub-num @sub-num = 'num-=1'></sub-num>
+    </div>
+</body>
+
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            num:0,
+        },
+        components:{
+            'add-num':{
+                props:[],
+                data(){
+                    return{
+
+                    }
+                },
+                template:
+                    `<button @click="$emit('add-num')">+1</button>`
+            },
+            'sub-num':{
+                props:[],
+                data(){
+                    return{
+                    }
+                },
+                template:`<button @click="$emit('sub-num')">-1</button>`
+            },
+        }
+    })
+</script>
+</html>
