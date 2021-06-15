@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        ul{
+            list-style: none;
+            margin:0;
+            padding:0;
+        }
+        li{
+            display:block;
+            margin:20px;
+            display:flex;
+            
+        }
+        li > div{
+            padding:0 20px;   
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <form action="">
+                姓名：<input type="text" v-model="message.name">
+                性别：<input type="radio" value="男" name="sex" checked v-model="message.sex">
+                      <label for="sex">男</label>
+                      <input type="radio" value="女" name="sex" v-model="message.sex">
+                      <label for="sex">女</label>
+                      </radiogroup>
+                年龄：<select name="age" id="select" v-model="message.age">
+                        <option v-for="num in 100" :value="num" >{{num}}</option>
+                        </select>
+                籍贯：<input type="text" v-model="message.hometown">
+                <input type="button" value="添加" @click="add">
+            </form>
+            
+        </div>
+        
+        <ul>
+            <li v-for="(item,index) in list" :key="index">
+                    <div>{{item.name}}</div>      
+                    <div>{{item.sex}}</div>
+                    <div>{{item.age}}</div>
+                    <div>{{item.hometown}}</div>
+                    <input type="button" @click="del(index)" value="删除">
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            list:[],
+            message:
+            {
+                name:"",
+                sex:"男",
+                age:"",
+                hometown:"",
+            }
+        },
+        methods:{
+            add(){
+                this.list.push(this.message);
+                this.message = {
+                    name:"",
+                    sex:"男",
+                    age:"",
+                    hometown:"",
+                }
+                console.log(this.list);
+            },
+            del(index){
+                    this.list.splice(index,1);
+            },
+        }
+    })
+</script>
+</html>
