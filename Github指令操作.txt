@@ -1,0 +1,42 @@
+git clone git@github.com:dengkui123/page.github.io.git	--复制GitHub到本地文件夹
+进入子目录
+git status  					--显示本地文件夹和GitHub仓库中代码的区别
+git add  + 文件名/					--新建文件夹加入到仓库中
+git commit -m " add Practice"			--提交一条附带说明，在仓库中锁定（但目前还是本地文件）
+git push						--把本地项目推送到github.com
+
+
+
+git  bash
+
+git branch:查看分支
+git branch feature1		--拷贝分支feature1
+git checkout feature1	--切换到feature1分支
+
+
+命令   git config --global user.name "你的git名称"
+命令   git config --global user.email "你的git验证邮箱"
+创建项目 https://...
+
+git branch -M main		--切换分支为main
+git init	--创建.git文件
+本地文件上传git服务器：
+git add '文件名'	--把文件提存放到暂存区
+git commit -m '备注'  --把文件提交到仓库有（仍然是本地文件）
+git status  --查看commit状态
+（*git diff '文件名' --查看修改内容
+git add、git commit、git status）
+
+git reset --hard HEAD^ 	--退回到上个版本
+
+删除：
+git add 
+git commit -m '备注'
+rm '文件名'
+恢复：
+git reflog
+git reset --hard 版本号 恢复文件
+
+push到服务器：
+git remote add origin https://...
+git push -u origin main
